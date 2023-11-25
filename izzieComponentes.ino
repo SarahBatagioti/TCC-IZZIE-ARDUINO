@@ -11,6 +11,7 @@ const int centerTriggerPin = 4; // Pino de trigger do sensor central
 const int centerEchoPin = 5; // Pino de eco do sensor central
 const int rightTriggerPin = 6; // Pino de trigger do sensor direito
 const int rightEchoPin = 7; // Pino de trigger do sensor direito
+const int motorVibratorPin = LED_BUILTIN; //sensor vibratório
 
 void setup() {
 
@@ -29,6 +30,7 @@ void setup() {
   pinMode(leftEchoPin, INPUT);
   pinMode(centerEchoPin, INPUT);
   pinMode(rightEchoPin, INPUT);
+  pinMode(motorVibratorPin, OUTPUT); // Configura o pino do motor vibratório
 
 }
 
@@ -72,6 +74,13 @@ void loop() {
     digitalWrite(8, LOW);
   }
   delay(100);
+
+  // Motor Vibratório
+  if (leftDistance <= 30 || centerDistance <= 30 || rightDistance <= 30) {
+    digitalWrite(motorVibratorPin, HIGH); // Liga o motor vibratório
+    delay(5000); // Mantém ligado por 5 segundos
+    digitalWrite(motorVibratorPin, LOW); // Desliga o motor vibratório
+  }
 
 }
 
